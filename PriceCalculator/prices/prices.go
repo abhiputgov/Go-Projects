@@ -32,7 +32,7 @@ func (jobToRead TaxIncludedPriceStruct) LoadData() []string {
 		file.Close()
 		return []string{}
 	}
-
+	fmt.Println(lines)
 	return lines
 
 }
@@ -46,8 +46,9 @@ func (job TaxIncludedPriceStruct) Process() {
 }
 
 func NewTaxIncludedPriceJob(taxRate float64) *TaxIncludedPriceStruct {
+	priceFromFile := LoadData()
 	return &TaxIncludedPriceStruct{
-		InputPrices: []float64{10, 20, 30},
+		InputPrices: priceFromFile,
 		TaxRate:     taxRate,
 	}
 }
