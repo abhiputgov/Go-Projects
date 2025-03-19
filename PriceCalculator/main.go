@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	p "go/priceCalculator/prices"
+	"go/priceCalculator/prices"
 )
 
 func main() {
@@ -11,7 +11,7 @@ func main() {
 	result := make(map[float64][]float64)
 
 	for _, taxRate := range taxRates {
-		p.NewTaxIncludedPriceJob(taxRate).Process()
+		prices.NewTaxIncludedPriceJob(taxRate).Process()
 	}
 	fmt.Println(result)
 }
