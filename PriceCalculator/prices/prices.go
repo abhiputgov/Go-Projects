@@ -1,1 +1,3 @@
+package prices
 
+func prices() {}
