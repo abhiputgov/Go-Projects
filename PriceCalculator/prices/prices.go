@@ -32,6 +32,7 @@ func (job *TaxIncludedPriceJob) LoadDataFromFile() {
 	prices, errFromStrConversion := conversion.StringToFloat(lines)
 	if errFromStrConversion != nil {
 		displayTheError(errFromStrConversion, "Conversion from string to float failed.")
+		return
 	}
 	job.InputPrices = prices
 }
