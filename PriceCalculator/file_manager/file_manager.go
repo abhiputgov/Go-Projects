@@ -2,6 +2,8 @@ package file_manager
 
 import (
 	"bufio"
+	"encoding/json"
+	"errors"
 	"os"
 )
 
@@ -21,4 +23,19 @@ func ReadLinesFromFile(filePath string) ([]string, error) {
 		return nil, errFromScanner
 	}
 	return lines, nil
+}
+
+func WriteJSON(path string, data any) error {
+	createdFile, errCreatingFile := os.Create(path)
+	if errCreatingFile != nil {
+		return errors.New("Failed to create file.")
+	}
+	encoder := json.NewEncoder(createdFile)
+	errorEncoding := encoder.Encode(data)
+	if errorEncoding != nil {
+		createdFile.Close()
+		return errors.New("Failed to convert data to JSON.")
+	}
+	createdFile.Close()
+	return nil
 }
