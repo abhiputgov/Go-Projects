@@ -31,7 +31,6 @@ func (fm FileManager) ReadLinesFromFile() ([]string, error) {
 	}
 	errFromScanner := scanner.Err()
 	if errFromScanner != nil {
-		file.Close()
 		return nil, errFromScanner
 	}
 	return lines, nil
@@ -42,12 +41,13 @@ func (fm FileManager) WriteResult(data any) error {
 	if errCreatingFile != nil {
 		return errors.New("Failed to create file.")
 	}
+	defer createdFile.Close()
 	encoder := json.NewEncoder(createdFile)
 	errorEncoding := encoder.Encode(data)
 	if errorEncoding != nil {
-		createdFile.Close()
+		//createdFile.Close()
 		return errors.New("Failed to convert data to JSON.")
 	}
-	createdFile.Close()
+	//createdFile.Close()
 	return nil
 }
