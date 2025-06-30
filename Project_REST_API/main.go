@@ -2,12 +2,16 @@ package main
 
 import (
 	models "go/restapi/models"
-	"net/http"
 
-	"github.com/gin-gonic/gin"
+	http "net/http"
+
+	gin "github.com/gin-gonic/gin"
+
+	db "go/restapi/db"
 )
 
 func main() {
+	db.IniDB()
 	engine := gin.Default()
 	engine.GET("/", home)
 	engine.GET("/events", listEvents)
